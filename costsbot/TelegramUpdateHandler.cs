@@ -29,7 +29,6 @@ internal class TelegramUpdateHandler : IUpdateHandler
 
             case UpdateType.Message:
                 {
-                    Console.WriteLine(update.Message.Text);
                     message = new()
                     {
                         ChatId = update.Message.Chat.Id,

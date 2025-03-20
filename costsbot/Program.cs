@@ -77,7 +77,6 @@ Func<ContentResultV2, Task<SentTelegramMessage>>  sendAction = async resp =>
     parseMode: resp.ParseMode,
     disableWebPagePreview: resp.DisableWebPagePreview);
   
-    Console.WriteLine(JsonConvert.SerializeObject(resp));
     return new SentTelegramMessage
     {
         SentMessage = messageResponse
