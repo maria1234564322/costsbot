@@ -19,14 +19,14 @@ using TelegramBot.ChatEngine.Setup;
 using static TelegramBot.ChatEngine.Commands.Repsonses.Button;
 using static TelegramBot.ChatEngine.Commands.Repsonses.Menu;
 
-string dbPath = "Data Source=/db/Costs.db;";
+string dbPath = "/db/Costs.db";
 System.Data.SQLite.SQLiteConnection.CreateFile(dbPath);
 var builder = new MessageHandlerBuilder();
 //var connectionString = builder.Configuration["ConnectionStrings:ApplicationDb"];
 builder.Services.AddCommandsAndStages();
 var client = new TelegramBotClient("7670092141:AAEaqwDf7f6lFtZz5qrB-vnF_VFYyNkpyf0");
 builder.Services.AddSingleton<ITelegramBotClient>(client);
-builder.Services.AddDbContext<ApplicationDbContext>(b => b.UseSqlite(dbPath));
+builder.Services.AddDbContext<ApplicationDbContext>(b => b.UseSqlite($"Data Source={dbPath};"));
 builder.Services.AddTransient<IPotentialPurchaseRepository, PotentialPurchaseRepository>();
 builder.Services.AddTransient<IPotentialPurchaseService, PotentialPurchaseService>();
 builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
