@@ -9,7 +9,7 @@ namespace DataAccses
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlite("Data Source=C:\\Databases\\Outlay.db;");
+            optionsBuilder.UseSqlite("Data Source=/db/Costs.db;");
             return new ApplicationDbContext(optionsBuilder.Options);
         }
     }

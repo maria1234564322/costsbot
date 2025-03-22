@@ -23,7 +23,7 @@ var builder = new MessageHandlerBuilder();
 builder.Services.AddCommandsAndStages();
 var client = new TelegramBotClient("7670092141:AAEaqwDf7f6lFtZz5qrB-vnF_VFYyNkpyf0");
 builder.Services.AddSingleton<ITelegramBotClient>(client);
-builder.Services.AddDbContext<ApplicationDbContext>(b => b.UseSqlite("Data Source=C:\\Databases\\Outlay.db;"));
+builder.Services.AddDbContext<ApplicationDbContext>(b => b.UseSqlite("Data Source=/db/Costs.db;"));
 builder.Services.AddTransient<IPotentialPurchaseRepository, PotentialPurchaseRepository>();
 builder.Services.AddTransient<IPotentialPurchaseService, PotentialPurchaseService>();
 builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
@@ -85,6 +85,9 @@ Func<ContentResultV2, Task<SentTelegramMessage>>  sendAction = async resp =>
 };
 builder.MessageTransportation.RegisterSenderAction(sendAction);
 var handler = builder.Build();
+Console.WriteLine("App started. Applying migrations.");
+handler.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+Console.WriteLine("Migrations applied successfully.");
 updateHandler.Handler = handler;
 client.StartReceiving(updateHandler);
 LoopConsoleClosing();

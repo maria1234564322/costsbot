@@ -6,4 +6,4 @@ services:
       context: ./
       dockerfile: ./CostsBot/Dockerfile
     volumes:
-      - ./artifacts:/app/artifacts
+      - ./db:/app/db
