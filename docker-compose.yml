@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  costsbot:
+    #restart: on-failure
+    build:
+      context: ./
+      dockerfile: ./CostsBot/Dockerfile
+    volumes:
+      - ./artifacts:/app/artifacts
