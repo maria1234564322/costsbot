@@ -22,6 +22,8 @@ using static TelegramBot.ChatEngine.Commands.Repsonses.Menu;
 string dbPath = "/app/db/Costs.db";
 System.Data.SQLite.SQLiteConnection.CreateFile(dbPath);
 var builder = new MessageHandlerBuilder();
+
+
 //var connectionString = builder.Configuration["ConnectionStrings:ApplicationDb"];
 builder.Services.AddCommandsAndStages();
 var client = new TelegramBotClient("7670092141:AAEaqwDf7f6lFtZz5qrB-vnF_VFYyNkpyf0");
