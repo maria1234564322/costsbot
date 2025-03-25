@@ -19,7 +19,7 @@ using TelegramBot.ChatEngine.Setup;
 using static TelegramBot.ChatEngine.Commands.Repsonses.Button;
 using static TelegramBot.ChatEngine.Commands.Repsonses.Menu;
 
-string dbPath = "/db/Costs.db";
+string dbPath = "/app/db/Costs.db";
 System.Data.SQLite.SQLiteConnection.CreateFile(dbPath);
 var builder = new MessageHandlerBuilder();
 //var connectionString = builder.Configuration["ConnectionStrings:ApplicationDb"];
