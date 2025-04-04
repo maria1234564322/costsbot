@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CostsBot": {
+      "commandName": "Project",
+      "commandLineArgs": "Production" //Production,Development
+    }
+  }
+}

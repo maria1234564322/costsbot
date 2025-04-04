@@ -7,6 +7,7 @@ public class ApplicationDbContext : DbContext
 {
     public DbSet<Outlay> Outlay { get; set; }
     public DbSet<PotentialPurchase> PotentialPurchase { get; set; }
+    public DbSet<User> Users { get; set; }
     
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -17,12 +18,5 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlite("Data Source=C:\\Databases\\Outlay.db;");
-        }
-    }
 }
 

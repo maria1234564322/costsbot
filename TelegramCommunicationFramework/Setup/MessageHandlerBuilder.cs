@@ -12,6 +12,8 @@ public class MessageHandlerBuilder
     public CachingBuilder Caching { get; }
     public LoggingBuilder Logging { get; }
     public MessagingDefaults MessagingDefaults { get; set; } = new();
+    public object ServiceProvider { get; set; }
+
     public MessageHandlerBuilder()
     {
         Middleware = new();

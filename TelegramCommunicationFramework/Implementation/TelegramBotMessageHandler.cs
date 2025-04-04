@@ -16,6 +16,7 @@ public class TelegramBotMessageHandler : IMessageHandler
 {
     private readonly Func<ContentResultV2, Task<SentTelegramMessage>> _sender;
     public IServiceProvider ServiceProvider { get; }
+
     private readonly IBotCache _cache;
     private readonly RoutingTable _routingTable;
     private readonly MiddlewareHandler _perCommandMiddlewareHandler;
