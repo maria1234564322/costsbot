@@ -38,7 +38,7 @@ internal class ExceptionMenu : ITelegramCommand
                     { 
                         new Button(rt.AlternativeRoute<GetWeekExpensesCommand>()),
                         new Button(rt.AlternativeRoute<GetMonthlyExpensesCommand>()),
-                        new Button(rt.AlternativeRoute<GetExpensesWithCommand>())
+                       // new Button(rt.AlternativeRoute<GetExpensesWithCommand>())
                     },
 
                     new[]

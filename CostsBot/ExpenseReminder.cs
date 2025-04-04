@@ -25,7 +25,7 @@ namespace CostsBot
         {
             Console.WriteLine("🚀 Reminder loop started!");
 
-            var reminderTimes = new[] { "11:00", "16:00", "22:00" }
+            var reminderTimes = new[] { "11:00", "16:30", "22:00" }
                 .Select(t => TimeSpan.Parse(t))
                 .ToList();
 
