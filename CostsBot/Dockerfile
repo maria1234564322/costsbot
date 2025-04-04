@@ -5,6 +5,7 @@ WORKDIR /app
 COPY . /app/sources
 WORKDIR /app/sources
 
+
 # build all projects
 RUN dotnet restore
 RUN dotnet publish -c Release -o /app/CostsBot --no-restore 
