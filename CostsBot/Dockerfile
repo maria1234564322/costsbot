@@ -10,5 +10,6 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o /app/CostsBot --no-restore 
 
 WORKDIR /app/CostsBot
-CMD ["dotnet", "CostsBot.dll"]
+ENTRYPOINT ["dotnet", "CostsBot.dll"]
+CMD ["Production"]
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
