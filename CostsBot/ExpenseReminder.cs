@@ -35,7 +35,10 @@ namespace CostsBot
             {
                 while (!_cts.Token.IsCancellationRequested)
                 {
-                    var now = DateTime.Now;
+                    var now = TimeZoneInfo.ConvertTimeFromUtc(
+                    DateTime.UtcNow,
+                    TimeZoneInfo.FindSystemTimeZoneById("FLE Standard Time"));
+
                     var currentTime = now.TimeOfDay;
 
                     if (now.Hour == 0 && now.Minute == 0)
