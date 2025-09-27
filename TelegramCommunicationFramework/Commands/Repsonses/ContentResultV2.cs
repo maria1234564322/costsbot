@@ -1,4 +1,5 @@
 ﻿using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace TelegramBot.ChatEngine.Commands.Repsonses;
 
@@ -17,6 +18,7 @@ public class ContentResultV2
     public int? LastBotMessageId { get; set; }
     public ParseMode? ParseMode { get; set; } = null;
     public bool DisableWebPagePreview { get; set; }
+    public ReplyKeyboardMarkup ReplyMarkup { get; set; }
 }
 public class Button
 {

@@ -1,7 +1,7 @@
-﻿using System.Globalization;
-using Application;
+﻿using Application;
 using Common;
 using DataAccess.Entities;
+using System.Globalization;
 using Telegram.Bot.Types.Enums;
 using TelegramBot.ChatEngine.Commands;
 
@@ -32,61 +32,38 @@ namespace CostsBot.ExceptionCommand
         private Task<StageResult> GenerateResponse(List<Outlay> purchases, DateTime date)
         {
             if (purchases.Count == 0)
-            {
                 return SendResponse("There are no purchases for today!");
-            }
 
-            decimal totalSum = purchases.Sum(p => p.Amount);
-            var categorySums = purchases
-                .GroupBy(p => p.TypeOfExpense)
-                .Select(g => new { Category = GetExpenseType((TypesExpenses)g.Key), Sum = g.Sum(p => p.Amount) })
-                .ToList();
-
-            string dateFormatted = date.ToString("dd.MM.yyyy");
-            string response = $"Your purchases for {dateFormatted}:\n```\n";
-            response += FormatPurchases(purchases);
-            response += $"\nTotal spent: {totalSum:F2}\n";
-            response += "Spending by categories:\n";
-
-            foreach (var category in categorySums)
-            {
-                response += $"{category.Category}: {category.Sum:F2}\n";
-            }
-
-            return SendResponse(response + "```");
+            string report = BuildMinimalReport(purchases, date);
+            return SendResponse(report);
         }
 
-        private string FormatPurchases(List<Outlay> purchases)
+        private string BuildMinimalReport(List<Outlay> purchases, DateTime date)
         {
-            const int idWidth = 5;
-            const int descWidth = 15;
-            const int dateWidth = 10;
-            const int typeWidth = 15;
-            const int amountWidth = 10;
+            var sb = new System.Text.StringBuilder();
 
-            string result =
-                $"{"ID",-idWidth} | {"Description",-descWidth} | {"Date",-dateWidth} | {"Type",-typeWidth} | {"Amount",-amountWidth}\n" +
-                $"{new string('-', idWidth)}-|-{new string('-', descWidth)}-|-{new string('-', dateWidth)}-|-{new string('-', typeWidth)}-|-{new string('-', amountWidth)}\n";
+            // Заголовок
+            sb.AppendLine($"📒 *Daily Expenses — {date:dd.MM.yyyy}*");
+            sb.AppendLine();
 
-            foreach (var purchase in purchases)
+            // Шапка
+            sb.AppendLine($"ID   Description              Amount");
+            sb.AppendLine();
+
+            // Рядки
+            foreach (var p in purchases)
             {
-                string id = purchase.Id.ToString().Length > idWidth
-                    ? purchase.Id.ToString().Substring(0, idWidth - 1) + "~"
-                    : purchase.Id.ToString();
+                string desc = p.Description.Length > 20
+                    ? p.Description.Substring(0, 17) + "..."
+                    : p.Description;
 
-                string description = purchase.Description.Length > descWidth
-                    ? purchase.Description.Substring(0, descWidth - 3) + "..."
-                    : purchase.Description;
-
-                string type = GetExpenseType((TypesExpenses)purchase.TypeOfExpense);
-                type = type.Length > typeWidth
-                    ? type.Substring(0, typeWidth - 3) + "..."
-                    : type;
-
-                result += $"{id,-idWidth} | {description,-descWidth} | {purchase.DateTime:dd.MM.yyyy} | {type,-typeWidth} | {purchase.Amount,amountWidth:F2}\n";
+                sb.AppendLine($"{p.Id,-4} {desc,-20} {p.Amount,10:F2}");
             }
 
-            return result;
+            sb.AppendLine();
+            sb.AppendLine($"*TOTAL:* {purchases.Sum(x => x.Amount):F2}");
+
+            return sb.ToString();
         }
 
         private string GetExpenseType(TypesExpenses type) => type.ToString();
@@ -101,5 +78,7 @@ namespace CostsBot.ExceptionCommand
         }
     }
 }
+
+
 
 

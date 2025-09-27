@@ -25,10 +25,10 @@ internal class Program
     {
         string appSettingsFileName = "appsettings.Development.json";
 
-        if (args.Length != 0)
-        {
-            appSettingsFileName = $"appSettings.{args[0]}.json";
-        }
+        //if (args.Length != 0)
+       // {
+       //     appSettingsFileName = $"appSettings.{args[0]}.json";
+       // }
 
         var builder = new MessageHandlerBuilder();
         var appSettingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, appSettingsFileName);
@@ -41,6 +41,15 @@ internal class Program
         builder.Services.AddSingleton<ITelegramBotClient>(client);
         builder.Services.AddSingleton<ExpenseReminder>(); // RemindeR
         builder.Services.AddTransient<IExpenseReminderRepository, ExpenseReminderRepository>();
+
+        // Реєстрація сервісів
+        builder.Services.AddScoped<IExpenseService, ExpenseService>();
+
+        // Реєстрація репозиторіїв
+        builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
+        builder.Services.AddScoped<IUserRepository, UserRepository>();
+        builder.Services.AddScoped<IExpenseReminderRepository, ExpenseReminderRepository>();
+        builder.Services.AddScoped<IPotentialPurchaseRepository, PotentialPurchaseRepository>();
 
 
         builder.Services.AddDbContext<ApplicationDbContext>(b => b.UseSqlite(connectionString));

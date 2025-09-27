@@ -50,7 +50,7 @@ namespace CostsBot.ExceptionCommand
                 .ToList();
 
             string monthName = startDate.ToString("MMMM yyyy", new CultureInfo("en-US")); // Отримуємо назву місяця
-            string response = $"Your purchases for {monthName} ({startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}):\n```\n";
+            string response = $"Your purchases for {monthName} ({startDate:dd.MM.yyyy} - {endDate:dd.MM.yyyy}):\n \n";
             response += FormatPurchases(purchases);
             response += $"\nTotal spent: {totalSum:F2}\n";
             response += "Spending by categories:\n";
