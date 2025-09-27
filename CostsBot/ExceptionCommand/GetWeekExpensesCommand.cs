@@ -3,6 +3,7 @@ using TelegramBot.ChatEngine.Commands;
 using Telegram.Bot.Types.Enums;
 using DataAccess.Entities;
 using Common;
+using System.Text;
 
 namespace CostsBot.Commands;
 
@@ -43,8 +44,8 @@ internal class GetWeekExpensesCommand : ITelegramCommand
             .Select(g => new { Category = GetExpenseType((TypesExpenses)g.Key), Sum = g.Sum(p => p.Amount) })
             .ToList();
 
-        string response = $"⏳📆Your purchases from {startDate:dd.MM.yyyy} to {endDate:dd.MM.yyyy}⏳:";
-        response += FormatPurchases(purchases);
+        string response = $"⏳📆Your purchases from {startDate:dd.MM.yyyy} to {endDate:dd.MM.yyyy}⏳:\n";
+        response += FormatPurchasesAsCsv(purchases);
         response += $"\n💸Total spent💸: {totalSum:F2}\n";
         response += "👛Spending by categories👛:\n";
 
@@ -56,38 +57,24 @@ internal class GetWeekExpensesCommand : ITelegramCommand
         return SendResponse(response);
     }
 
-    private string FormatPurchases(List<Outlay> purchases)
+    private string FormatPurchasesAsCsv(List<Outlay> purchases)
     {
-        const int idWidth = 4;
-        const int descWidth = 15;
-        const int dateWidth = 10;
-        const int typeWidth = 15;
-        const int amountWidth = 10;
-
-        string result =
-            $"{"ID",-idWidth} | {"Description",-descWidth} | {"Date",-dateWidth} | {"Type",-typeWidth} | {"Amount",-amountWidth}\n" +
-            $"{new string('-', idWidth)}-|-{new string('-', descWidth)}-|-{new string('-', dateWidth)}-|-{new string('-', typeWidth)}-|-{new string('-', amountWidth)}\n";
+        var sb = new StringBuilder();
+        sb.AppendLine("ID,Description,Date,Type,Amount");
 
         foreach (var purchase in purchases)
         {
-            string id = purchase.Id.ToString().Length > idWidth
-              ? purchase.Id.ToString().Substring(0, idWidth - 3) + "~"
-              : purchase.Id.ToString();
-            string description = purchase.Description.Length > descWidth
-                ? purchase.Description.Substring(0, descWidth - 3) + "..."
-                : purchase.Description;
+            string id = purchase.Id.ToString();
+            string description = purchase.Description.Replace(",", " "); 
+            string date = purchase.DateTime.ToString("dd.MM.yyyy");
+            string type = GetExpenseType((TypesExpenses)purchase.TypeOfExpense).Replace(",", " ");
+            string amount = purchase.Amount.ToString("F2");
 
-            string type = GetExpenseType((TypesExpenses)purchase.TypeOfExpense);
-            type = type.Length > typeWidth
-                ? type.Substring(0, typeWidth - 3) + "..."
-                : type;
-
-            result += $"{purchase.Id,-idWidth} | {description,-descWidth} | {purchase.DateTime:dd.MM.yyyy} | {type,-typeWidth} | {purchase.Amount,amountWidth:F2}\n";
+            sb.AppendLine($"{id},{description},{date},{type},{amount}");
         }
 
-        return $@"```
-{result}
-```";
+      
+        return $"<pre>{sb}</pre>";
     }
 
     private string GetExpenseType(TypesExpenses type) => type.ToString();
@@ -101,5 +88,6 @@ internal class GetWeekExpensesCommand : ITelegramCommand
         });
     }
 }
+
 
 
