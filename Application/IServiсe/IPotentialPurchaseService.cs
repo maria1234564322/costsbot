@@ -10,7 +10,9 @@ namespace Application.IServiсe
     public interface IPotentialPurchaseService
     {
         List<PotentialPurchase> GetAllPotentialPurchases();
-        void AddPotentialPurchase(string name);
-        void DeletePotentialPurchase(int id);
+        
+        void AddPotentialPurchase(PotentialPurchase purchase);
+        bool DeletePotentialPurchase(int id);
+        void AddPotentialPurchase();
     }
 }

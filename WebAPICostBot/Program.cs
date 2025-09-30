@@ -1,4 +1,6 @@
 ﻿using Application;
+using Application.IServiсe;
+using Application.Service;
 using DataAccess;
 using DataAccess.IRepositories;
 using DataAccess.Repositories;
@@ -50,7 +52,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddTransient<IExpenseRepository, ExpenseRepository>();
 builder.Services.AddTransient<IExpenseService, ExpenseService>();
 builder.Services.AddTransient<IExpenseReminderRepository, ExpenseReminderRepository>();
-
+builder.Services.AddTransient<IPotentialPurchaseRepository, PotentialPurchaseRepository>();
+builder.Services.AddTransient<IPotentialPurchaseService, PotentialPurchaseService>();
 // JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 builder.Services.AddSingleton(jwtSettings);

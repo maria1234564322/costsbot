@@ -18,20 +18,34 @@ namespace Application.Service
             _repository = repository;
         }
 
-        public void AddPotentialPurchase(string name)
-        {
-            var purchase = new PotentialPurchase { Name = name };
-            _repository.AddPotentialPurchase(purchase);
-        }
-
+       
 
         public List<PotentialPurchase> GetAllPotentialPurchases()
         {
             return _repository.GetAllPotentialPurchase();
         }
-        public void DeletePotentialPurchase(int id)
+        
+
+        public bool DeletePotentialPurchase(int id)
         {
+            var purchase = _repository.GetAllPotentialPurchase()
+                                      .FirstOrDefault(x => x.Id == id);
+
+            if (purchase == null)
+                return false;
+
             _repository.DeletePotentialPurchase(id);
+            return true;
+        }
+
+        public void AddPotentialPurchase(PotentialPurchase purchase)
+        {
+            _repository.AddPotentialPurchase(purchase);
+        }
+
+        public void AddPotentialPurchase()
+        {
+            throw new NotImplementedException();
         }
     }
 }

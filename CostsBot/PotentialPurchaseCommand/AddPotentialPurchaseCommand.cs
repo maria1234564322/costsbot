@@ -45,7 +45,7 @@ internal class SavePurchaseStage : ITelegramStage
     public Task<StageResult> Execute(TelegramMessageContext ctx)
     {
         var Name = ctx.Message.Text;
-        _pp.AddPotentialPurchase(Name);
+        _pp.AddPotentialPurchase();
         return Task.FromResult(ContentResponse.Text($"Added potential purchase '{Name}'."));
     }
 }
