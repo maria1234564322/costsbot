@@ -54,6 +54,8 @@ builder.Services.AddTransient<IExpenseService, ExpenseService>();
 builder.Services.AddTransient<IExpenseReminderRepository, ExpenseReminderRepository>();
 builder.Services.AddTransient<IPotentialPurchaseRepository, PotentialPurchaseRepository>();
 builder.Services.AddTransient<IPotentialPurchaseService, PotentialPurchaseService>();
+builder.Services.AddScoped<INoteRepository, NoteRepository>();
+builder.Services.AddScoped<INoteService, NoteService>();
 // JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 builder.Services.AddSingleton(jwtSettings);
