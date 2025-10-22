@@ -18,8 +18,6 @@ namespace Application.Service
             _repository = repository;
         }
 
-       
-
         public List<PotentialPurchase> GetAllPotentialPurchases()
         {
             return _repository.GetAllPotentialPurchase();
@@ -43,10 +41,7 @@ namespace Application.Service
             _repository.AddPotentialPurchase(purchase);
         }
 
-        public void AddPotentialPurchase()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
 

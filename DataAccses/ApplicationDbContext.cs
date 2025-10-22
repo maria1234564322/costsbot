@@ -9,6 +9,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<PotentialPurchase> PotentialPurchase { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Note> Notes { get; set; }
+    public DbSet<PeriodicReminder> PeriodicReminders { get; set; }
 
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
