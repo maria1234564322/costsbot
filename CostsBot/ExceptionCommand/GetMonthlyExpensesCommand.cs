@@ -1,11 +1,7 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Application;
+﻿using Application;
 using Common;
 using DataAccess.Entities;
+using System.Globalization;
 using Telegram.Bot.Types.Enums;
 using TelegramBot.ChatEngine.Commands;
 

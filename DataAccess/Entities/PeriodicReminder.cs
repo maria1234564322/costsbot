@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,9 @@ namespace DataAccess.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-
-        // Час, коли має спрацьовувати нагадування
         public TimeSpan Time { get; set; }
-        public List<DayOfWeek> ActiveDays { get; set; } = new List<DayOfWeek>();
+        public Day ActiveDays { get; set; } 
         public bool IsActive { get; set; } = true;
-        // Дата створення
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } 
     }
 }

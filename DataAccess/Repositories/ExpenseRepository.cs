@@ -24,10 +24,11 @@ namespace DataAccess.Repositories
 
         public void AddExpense(Outlay expense)
         {
-            _context.Outlay.Add(expense); 
+            _context.Outlay.Add(expense);
             _context.SaveChanges();
         }
     }
 }
+
 
 

@@ -1,21 +1,13 @@
 ﻿using Application.IServiсe;
 using DataAccess.Entities;
 using DataAccess.IRepositories;
-using DataAccess.Migrations;
-using DataAccess.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Service
 {
-    public class PeriodicReminderServise: IPeriodicReminderServise
+    public class PeriodicReminderService: IPeriodicReminderService
     {
         private readonly IPeriodicReminderRepository _periodicReminderRepository;
-        public PeriodicReminderServise(IPeriodicReminderRepository periodicReminderRepository)
+        public PeriodicReminderService(IPeriodicReminderRepository periodicReminderRepository)
         {
             _periodicReminderRepository = periodicReminderRepository;
         }

@@ -1,7 +1,6 @@
 ﻿using Application;
 using Common;
 using DataAccess.Entities;
-using System.Globalization;
 using Telegram.Bot.Types.Enums;
 using TelegramBot.ChatEngine.Commands;
 

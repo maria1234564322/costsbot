@@ -56,6 +56,18 @@ builder.Services.AddTransient<IPotentialPurchaseRepository, PotentialPurchaseRep
 builder.Services.AddTransient<IPotentialPurchaseService, PotentialPurchaseService>();
 builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<INoteService, NoteService>();
+//
+// Реєстрація репозиторіїв
+builder.Services.AddScoped<IDishRepository, DishRepository>();
+builder.Services.AddScoped<IDayMenuRepository, DayMenuRepository>();
+
+
+builder.Services.AddScoped<IDishService, DishService>();
+builder.Services.AddScoped<IDayMenuService, DayMenuService>();
+
+builder.Services.AddTransient<IPeriodicReminderRepository, PeriodicReminderRepository>();
+builder.Services.AddScoped<IPeriodicReminderService, PeriodicReminderService>();
+
 // JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 builder.Services.AddSingleton(jwtSettings);

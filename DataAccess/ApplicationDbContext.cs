@@ -11,6 +11,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<Note> Notes { get; set; }
     public DbSet<PeriodicReminder> PeriodicReminders { get; set; }
 
+    public DbSet<Product> Products { get; set; } 
+    public DbSet<Dish> Dishes { get; set; }
+    public DbSet<DishProduct> DishProducts { get; set; }
+    public DbSet<DayMenu> DayMenus { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

@@ -1,5 +1,6 @@
-﻿using DataAccess.IRepositories;
+﻿
 using DataAccess.Entities;
+using DataAccess.IRepositories;
 
 namespace Application;
 
