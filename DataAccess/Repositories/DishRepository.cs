@@ -7,6 +7,7 @@ namespace DataAccess.Repositories
     public class DishRepository : IDishRepository
     {
         private readonly ApplicationDbContext _context;
+        public ApplicationDbContext GetDbContext() => _context;
 
         public DishRepository(ApplicationDbContext context)
         {

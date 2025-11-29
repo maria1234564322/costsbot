@@ -15,5 +15,6 @@ namespace DataAccess.IRepositories
         Dish? GetById(int id);
         List<Dish> GetAll();
         void SaveChanges();
+        ApplicationDbContext GetDbContext();
     }
 }

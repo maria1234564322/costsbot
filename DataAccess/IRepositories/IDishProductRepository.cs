@@ -11,9 +11,9 @@ namespace DataAccess.IRepositories
     {
         void Add(DishProduct dishProduct);
         void Update(DishProduct dishProduct);
-        DeleteDishProduct(int id);
         DishProduct? GetById(int id);
         List<DishProduct> GetAll();
         void SaveChanges();
+        void Remove(DishProduct dishProduct);
     }
 }

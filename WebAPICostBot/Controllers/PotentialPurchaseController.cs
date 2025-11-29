@@ -1,7 +1,9 @@
 ﻿using Application;
 using Application.IServiсe;
+using Common;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
+using TelegramBot.ChatEngine.Commands.Dto;
 
 namespace WebAPICostBot.Controllers
 {
@@ -39,12 +41,21 @@ namespace WebAPICostBot.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] PotentialPurchase purchase)
+        public IActionResult Add([FromBody] CreatePotentialPurchaseDto dto)
         {
-            if (purchase == null)
+            if (dto == null)
                 return BadRequest("Некоректні дані");
 
+            var purchase = new PotentialPurchase
+            {
+                Name = dto.Name,
+                Price = dto.Price,
+                Priority = (PriorityLevel)dto.Priority,
+                Status = (StatusWish)dto.Status
+            };
+
             _potentialPurchaseService.AddPotentialPurchase(purchase);
+
             return CreatedAtAction(nameof(GetAll), new { id = purchase.Id }, purchase);
         }
 

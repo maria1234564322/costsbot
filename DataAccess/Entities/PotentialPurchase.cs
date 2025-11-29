@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace DataAccess.Entities
         public string Name { get; set; }
         public decimal Price { get; set; }
         public PriorityLevel Priority { get; set; }
-        public string Status { get; set; }
+        public StatusWish Status { get; set; }
 
     }
 }

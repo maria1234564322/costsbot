@@ -59,15 +59,23 @@ builder.Services.AddScoped<INoteService, NoteService>();
 //
 // Реєстрація репозиторіїв
 builder.Services.AddScoped<IDishRepository, DishRepository>();
+builder.Services.AddScoped<IDishProductRepository, DishProductRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IDayMenuRepository, DayMenuRepository>();
 
-
+//IProductService
+builder.Services.AddScoped<IDishProductService, DishProductService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IDishService, DishService>();
 builder.Services.AddScoped<IDayMenuService, DayMenuService>();
 
 builder.Services.AddTransient<IPeriodicReminderRepository, PeriodicReminderRepository>();
 builder.Services.AddScoped<IPeriodicReminderService, PeriodicReminderService>();
-
+//робить назви класів унікальними
+builder.Services.AddSwaggerGen(c =>
+{
+    c.CustomSchemaIds(type => type.FullName);
+});
 // JWT
 var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
 builder.Services.AddSingleton(jwtSettings);
